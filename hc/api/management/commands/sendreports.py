@@ -34,9 +34,22 @@ class Command(BaseCommand):
 
         q = Profile.objects.filter(report_due | report_not_scheduled)
         q = q.filter(~Q(reports_allowed='none'))
+
         sent = 0
 
         for profile in q:
+            if(not profile.next_report_date):
+                days = 0
+                if profile.reports_allowed == 'daily':
+                    days = 1
+                elif profile.reports_allowed == 'weekly':
+                    days = 7
+                elif profile.reports_allowed == 'monthly':
+                    days = 30
+                period_before = now - timedelta(days=days)
+                if profile.user.date_joined > period_before:
+                    break
+
             if num_pinged_checks(profile) > 0:
                 self.stdout.write(self.tmpl % profile.user.email)
                 profile.send_report()
