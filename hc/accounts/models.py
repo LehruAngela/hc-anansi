@@ -19,11 +19,7 @@ class Profile(models.Model):
     team_name = models.CharField(max_length=200, blank=True)
     team_access_allowed = models.BooleanField(default=False)
     next_report_date = models.DateTimeField(null=True, blank=True)
-<<<<<<< HEAD
     reports_allowed = models.CharField(max_length=128, default="Monthly")
-=======
-    reports_allowed = models.CharField(max_length=128, default="monthly")
->>>>>>> [#153727844: Feature] Implemented feature for r user to be able to configure periodic reports for daily and weekly
     ping_log_limit = models.IntegerField(default=100)
     token = models.CharField(max_length=128, blank=True)
     api_key = models.CharField(max_length=128, blank=True)

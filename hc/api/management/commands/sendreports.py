@@ -34,10 +34,7 @@ class Command(BaseCommand):
 
         q = Profile.objects.filter(report_due | report_not_scheduled)
         q = q.filter(~Q(reports_allowed='none'))
-<<<<<<< HEAD
 
-=======
->>>>>>> [#153727844: Feature] Implemented feature for r user to be able to configure periodic reports for daily and weekly
         sent = 0
 
         for profile in q:
