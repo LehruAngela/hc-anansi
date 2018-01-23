@@ -40,12 +40,14 @@ class Command(BaseCommand):
         for profile in q:
             if(not profile.next_report_date):
                 days = 0
-                if profile.reports_allowed == 'daily':
+                if profile.reports_allowed == 'Daily':
                     days = 1
-                elif profile.reports_allowed == 'weekly':
+                elif profile.reports_allowed == 'Weekly':
                     days = 7
-                elif profile.reports_allowed == 'monthly':
+                elif profile.reports_allowed == 'Monthly':
                     days = 30
+                else:
+                    break
                 period_before = now - timedelta(days=days)
                 if profile.user.date_joined > period_before:
                     break
