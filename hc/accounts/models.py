@@ -56,11 +56,11 @@ class Profile(models.Model):
     def send_report(self):
         # reset next report date first:
         days = 0
-        if self.reports_allowed == 'daily':
+        if self.reports_allowed == 'Daily':
             days = 1
-        elif self.reports_allowed == 'weekly':
+        elif self.reports_allowed == 'Weekly':
             days = 7
-        elif self.reports_allowed == 'monthly':
+        elif self.reports_allowed == 'Monthly':
             days = 30
 
         now = timezone.now()
