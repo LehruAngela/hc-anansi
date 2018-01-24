@@ -252,7 +252,7 @@ $(function() {
 
         function applyFilters(index, element) {
             var tags = $(".my-checks-name", element).data("tags").split(" ");
-            for (var i = 0, tag; tag = checked[i]; i++) {
+            for (var i=0, tag; tag=checked[i]; i++) {
                 if (tags.indexOf(tag) == -1) {
                     $(element).hide();
                     return;
