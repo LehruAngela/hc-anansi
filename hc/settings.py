@@ -22,7 +22,6 @@ DEBUG = True
 ALLOWED_HOSTS = ['0.0.0.0', 'localhost', 'hc-anansi-staging.herokuapp.com',
                  'hc-anansi-production.herokuapp.com',
                  'hc-ibutiti.herokuapp.com']
-DEFAULT_FROM_EMAIL = 'hc-anansi@null.net'
 USE_PAYMENTS = False
 
 
@@ -133,11 +132,7 @@ USE_L10N = True
 
 USE_TZ = True
 
-<<<<<<< HEAD
 SITE_ROOT = os.environ.get("SITE_ROOT") or "http://localhost:8000"
-=======
-SITE_ROOT = "hc-anansi-blog.herokuapp.com/" # http://localhost:8000
->>>>>>> ADD deploy host
 PING_ENDPOINT = SITE_ROOT + "/ping/"
 PING_EMAIL_DOMAIN = HOST
 STATIC_URL = '/static/'
@@ -151,13 +146,14 @@ STATICFILES_FINDERS = (
 STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
 COMPRESS_OFFLINE = True
 
-DJMAIL_REAL_BACKEND = "djmail.backends.async.EmailBackend"
-EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
-EMAIL_HOST = "smtp.gmail.com"
-EMAIL_HOST_PORT = 587
-EMAIL_HOST_USER = os.environ.get("EMAIL_HOST_USER")
-EMAIL_HOST_PASSWORD = os.environ.get("EMAIL_HOST_PASSWORD")
+EMAIL_BACKEND = 'djmail.backends.default.EmailBackend'
+DJMAIL_REAL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')  # user email
+EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD') # user password
 EMAIL_USE_TLS = True
+
 
 # Slack integration -- override these in local_settings
 SLACK_CLIENT_ID = None

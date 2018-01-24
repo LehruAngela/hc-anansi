@@ -56,10 +56,11 @@ $(function() {
         pips: {
             mode: 'values',
             values: [durationA, durationB, durationC, durationD,
-                     durationE, durationG, durationH],
+                durationE, durationG, durationH
+            ],
             density: 4,
             format: {
-                to: secsToText, 
+                to: secsToText,
                 from: function() {}
             }
         }
@@ -67,7 +68,7 @@ $(function() {
 
     periodSlider.noUiSlider.on("update", function(a, b, value) {
         var rounded = Math.round(value);
-        $("#period-slider-value").text(secsToText(rounded)); 
+        $("#period-slider-value").text(secsToText(rounded));
         $("#update-timeout-timeout").val(rounded);
     });
 
@@ -98,7 +99,7 @@ $(function() {
 
     graceSlider.noUiSlider.on("update", function(a, b, value) {
         var rounded = Math.round(value);
-        $("#grace-slider-value").text(secsToText(rounded)); 
+        $("#grace-slider-value").text(secsToText(rounded));
         $("#update-timeout-grace").val(rounded);
     });
 
@@ -213,12 +214,17 @@ $(function() {
 
         function applyFilters(index, element) {
             var tags = $(".my-checks-name", element).data("tags").split(" ");
+<<<<<<< HEAD
             for (var i = 0, tag; tag = checked[i]; i++) {
                 if (tags.indexOf(tag) == -1) {
+=======
+            $.each(checked, function(key, value) {
+                if (key == -1) {
+>>>>>>> Nag interval Build Error Fix #153727845 (#19)
                     $(element).hide();
                     return;
                 }
-            }
+            });
 
             $(element).show();
         }
@@ -251,7 +257,7 @@ $(function() {
 
         function applyFilters(index, element) {
             var tags = $(".my-checks-name", element).data("tags").split(" ");
-            for (var i=0, tag; tag=checked[i]; i++) {
+            for (var i = 0, tag; tag = checked[i]; i++) {
                 if (tags.indexOf(tag) == -1) {
                     $(element).hide();
                     return;

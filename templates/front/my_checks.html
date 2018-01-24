@@ -5,6 +5,18 @@
             {% if request.team == request.user.profile %} My Checks {% else %} {{ request.team.team_name }} {% endif %}
         </h1>
     </div>
+<<<<<<< HEAD
+=======
+    {% if tags %}
+    <div id="my-checks-tags" class="col-sm-12">
+        {% for tag, count in tags %} {% if tag in down_tags %}
+        <button class="btn btn-danger btn-xs" data-toggle="button">{{ tag }}</button> {% elif tag in grace_tags %}
+        <button class="btn btn-warning btn-xs" data-toggle="button">{{ tag }}</button> {% else %}
+        <button class="btn btn-default btn-xs" data-toggle="button">{{ tag }}</button> {% endif %} {% endfor %}
+    </div>
+    {% endif %}
+
+>>>>>>> Nag interval Build Error Fix #153727845 (#19)
 </div>
 <div class="row">
     <div class="col-sm-12">
@@ -116,11 +128,19 @@
                     <div class="update-timeout-terms">
                         <p>
                             <span>Period</span> Expected time between pings.
+<<<<<<< HEAD
                         </p>
                         <p>
                             <span>Grace Time</span> When a check is late, how much time to wait until alert is sent.
                         </p>
                         <p>
+=======
+                        </p>
+                        <p>
+                            <span>Grace Time</span> When a check is late, how much time to wait until alert is sent.
+                        </p>
+                        <p>
+>>>>>>> Nag interval Build Error Fix #153727845 (#19)
                             <span>Nag Interval</span> The period between every nag alert.
                         </p>
                     </div>
