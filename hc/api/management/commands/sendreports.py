@@ -38,7 +38,7 @@ class Command(BaseCommand):
         sent = 0
 
         for profile in q:
-            if(not profile.next_report_date):
+            if(profile.next_report_date == ""):
                 days = 0
                 if profile.reports_allowed == 'Daily':
                     days = 1
