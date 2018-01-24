@@ -56,11 +56,10 @@ $(function() {
         pips: {
             mode: 'values',
             values: [durationA, durationB, durationC, durationD,
-                durationE, durationG, durationH
-            ],
+                     durationE, durationG, durationH],
             density: 4,
             format: {
-                to: secsToText,
+                to: secsToText, 
                 from: function() {}
             }
         }
@@ -68,7 +67,7 @@ $(function() {
 
     periodSlider.noUiSlider.on("update", function(a, b, value) {
         var rounded = Math.round(value);
-        $("#period-slider-value").text(secsToText(rounded));
+        $("#period-slider-value").text(secsToText(rounded)); 
         $("#update-timeout-timeout").val(rounded);
     });
 
@@ -99,7 +98,7 @@ $(function() {
 
     graceSlider.noUiSlider.on("update", function(a, b, value) {
         var rounded = Math.round(value);
-        $("#grace-slider-value").text(secsToText(rounded));
+        $("#grace-slider-value").text(secsToText(rounded)); 
         $("#update-timeout-grace").val(rounded);
     });
 

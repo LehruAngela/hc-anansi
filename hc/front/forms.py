@@ -20,11 +20,16 @@ class NameTagsForm(forms.Form):
 
 #increase max value in forms to allow upto 60days
 class TimeoutForm(forms.Form):
+<<<<<<< HEAD
     min_time = 60
     max_time = 5184000
     timeout = forms.IntegerField(min_value=min_time, max_value=max_time)
     grace = forms.IntegerField(min_value=min_time, max_value=max_time)
     nag = forms.IntegerField(min_value=min_time, max_value=max_time)
+=======
+    timeout = forms.IntegerField(min_value=60, max_value=5184000)
+    grace = forms.IntegerField(min_value=60, max_value=5184000)
+>>>>>>> Ft increase timeouts and grace periods #153727847 (#20)
 
 
 class AddChannelForm(forms.ModelForm):
