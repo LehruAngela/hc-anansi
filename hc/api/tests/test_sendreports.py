@@ -12,14 +12,15 @@ from hc.accounts.models import Profile
 class SendReportsTestCase(BaseTestCase):
 
     def test_it_sends_report_daily(self):
+        # self.client.login(username="alice@example.org", password="password")
+        
         check = Check(name="Test Check", user=self.alice)
         check.last_ping = timezone.now()
         check.save()
 
         self.profile.reports_allowed = 'Daily'
         now = timezone.now()
-        self.profile.next_report_date = now - timedelta(days=1)
-
+        self.profile.date_joined = now - timedelta(days=1)
         self.profile.save()
 
         result = call_command('sendreports')
@@ -36,7 +37,7 @@ class SendReportsTestCase(BaseTestCase):
 
         self.profile.reports_allowed = 'Weekly'
         now = timezone.now()
-        self.profile.next_report_date = now - timedelta(days=7)
+        self.profile.date_joined = now - timedelta(days=7)
 
         self.profile.save()
 
@@ -54,7 +55,7 @@ class SendReportsTestCase(BaseTestCase):
 
         self.profile.reports_allowed = 'Monthly'
         now = timezone.now()
-        self.profile.next_report_date = now - timedelta(days=30)
+        self.profile.date_joined = now - timedelta(days=30)
 
         self.profile.save()
 
@@ -64,4 +65,3 @@ class SendReportsTestCase(BaseTestCase):
         #Assert that the email was sent and check email content
         self.assertEqual(len(mail.outbox), 1)
         self.assertEqual(mail.outbox[0].subject, 'Monthly Report')
-

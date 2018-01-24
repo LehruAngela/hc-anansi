@@ -12,7 +12,6 @@ from django.urls import reverse
 from django.utils import timezone
 from hc.lib import emails
 
-
 class Profile(models.Model):
     # Owner:
     user = models.OneToOneField(User, blank=True, null=True)
