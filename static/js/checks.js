@@ -306,3 +306,8 @@ $(function() {
         prompt("Press Ctrl+C to select:", text);
     });
 });
+
+
+$('#myModal').on('shown.bs.modal', function () {
+    $('#myInput').trigger('focus')
+  })
