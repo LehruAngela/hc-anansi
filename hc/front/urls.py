@@ -31,7 +31,8 @@ channel_urls = [
 blog_urls = [
     url(r'^$', views.blogs, name="hc-blog"),
     url(r'^create_blog$', views.create_blog, name="hc-create_blog"),
-    url(r'^read_blog$', views.read_blog, name="hc-read_blog")
+    url(r'^read_blog/(?P<pk>\d+)$', views.read_blog, name="hc-read_blog")
+
 ]
 
 urlpatterns = [

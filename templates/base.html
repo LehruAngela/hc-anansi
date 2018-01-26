@@ -100,11 +100,12 @@
                     <a href="{% url 'hc-about' %}">About</a>
                 </li>
                 <li {% if page == 'blog' %} class="active" {% endif %}>
-<<<<<<< HEAD
+
                     <a href="{% url 'hc-blog' filter_by=0%}">Blog</a>
-=======
+
                     <a href="{% url 'hc-blog' %}">Blog</a>
->>>>>>> [Ft: #153727855]Add blogs feature
+
+                    <a href="{% url 'hc-blog' filter_by=0%}">Blog</a>
                 </li>
             </ul>
 
@@ -176,14 +177,13 @@
     {% compress js %}
     <script src="{% static 'js/jquery-2.1.4.min.js' %}"></script>
     <script src="{% static 'js/bootstrap.min.js' %}"></script>
-<<<<<<< HEAD
     <script src="https://getbootstrap.com/assets/js/vendor/holder.min.js"></script>
     <script src="https://getbootstrap.com/assets/js/vendor/popper.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/0.3.12/marked.min.js"></script>
-=======
-    <script src = "https://getbootstrap.com/assets/js/vendor/holder.min.js"></script>
-    <script src = "https://getbootstrap.com/assets/js/vendor/popper.min.js"></script>
->>>>>>> [Ft: #153727855]Add blogs feature
+    <script src="https://getbootstrap.com/assets/js/vendor/holder.min.js"></script>
+    <script src="https://getbootstrap.com/assets/js/vendor/popper.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/0.3.12/marked.min.js"></script>
+
     {% endcompress %}
     {% endblock %}
 </body>
