@@ -9,10 +9,26 @@
 {% block title %}blog{% endblock %}
 
 {% block content %}
+<div class="container">
+    <div>
+        <div class="container">
+            <ul class="nav nav-tabs">
+                <li role="presentation"><a href="{% url 'hc-blog' filter_by=0%}">Home</a></li>
+                {% if request.user.is_authenticated %}
+                <li role="presentation" class="active"><a href="#">Create Blog</a></li>
+                {% endif %}
+                <li role="presentation" class="dropdown">
+                </li>
+            </ul>
+        </div>        
+    </div>
+</div><br>
+
 <div class="col-sm-6 col-sm-offset-3">
         <span class="glyphicon glyphicon-home"></span>
   
     <form method="POST"> {% csrf_token %}
+<<<<<<< HEAD
         <div class="form-group">
             <!-- <div class="form-inline"> -->
                 <div class="form-group">
@@ -35,6 +51,23 @@
     <br>
       <button class="btn btn-primary" data-toggle="modal" data-target="#myModalNorm">
         add
+=======
+        <label for="category">Select category:</label><br>
+        <select id="category" name="category_name" class="form-control">
+          {% for category in category %}
+          <option value="{{ category.name }}"> {{ category.name }} </option>
+          {% endfor %}
+        </select><br>
+        <label for="title">Title:</label><br>
+        <input type="text" name="title" class="form-control myfieldclass" placeholder="Blog Title" required="" id="id_title"><br>
+        {{ form }}
+        <button type="submit" name="create_blog" class="submit-blog btn btn-default">Create Blog</button>
+    </form>
+</div>
+    <br>
+      <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModalNorm", style="padding: 9px;">
+        ADD
+>>>>>>> Fix: Merged conflicts
         </button>
         <div class="modal fade" id="myModalNorm" tabindex="-1" role="dialog" 
              aria-labelledby="myModalLabel" aria-hidden="true">
