@@ -52,31 +52,34 @@ def blogs(request, filter_by):
 def create_blog(request):
     form = CreateBlogPost(request.POST)
     category_form = CreateCategory(request.POST)
-    if "new_category" in request.POST:
-        if category_form.is_valid():
-            name = category_form.cleaned_data['category']
-            ctg = Category(name = name)
-            ctg.save()
-    elif "create_blog" in request.POST:
-        if form.is_valid():
-            title = request.POST['title'] 
-            blog = form.cleaned_data['content']
-            selected_category = request.POST['category_name']
-            category = Category.objects.get(name=selected_category)
-            published = timezone.now()
-            user = request.user
-            blog = Blog_post(title=title, content=blog, category=category,
-                             published=published, user=user)
-            blog.save()
-            messages.add_message(request, messages.INFO, 'Successfully created blog')
-            return redirect(read_blog, pk=blog.id)
-    categories = Category.objects.all()
-    ctx = {
-        'category':categories,
-        'form':form,
-        'category_form':category_form
-          }
-    return render(request, "front/create_blog.html", ctx)
+    if request.method == 'POST':
+        if "new_category" in request.POST:
+            if category_form.is_valid():
+                name = category_form.cleaned_data['category']
+                ctg = Category(name = name)
+                ctg.save()
+        elif "create_blog" in request.POST:
+            if form.is_valid():
+                title = request.POST['title'] 
+                blog = form.cleaned_data['content']
+                selected_category = request.POST['category_name']
+                category = Category.objects.get(name=selected_category)
+                published = timezone.now()
+                user = request.user
+                blog = Blog_post(title=title, content=blog, category=category,
+                                published=published, user=user)
+                blog.save()
+                messages.add_message(request, messages.INFO, 'Successfully created blog')
+                return redirect(read_blog, pk=blog.id)
+    else:
+        categories = Category.objects.all()
+        ctx = {
+            'category':categories,
+            'form':CreateBlogPost({'content':'Write Blog'}),
+            'category_form':category_form,
+            'edit': False
+            }
+        return render(request, "front/create_blog.html", ctx)
 
 
 def read_blog(request, pk):
@@ -84,7 +87,7 @@ def read_blog(request, pk):
     blog = Blog_post.objects.get(pk=pk)
     featured = Blog_post.objects.get(pk=pk)
     comments = Comment.objects.filter(blog = blog.id)
-    url = f"http://localhost:8000/blog/read_blog/{pk}"
+    url = f"http://hc-anansi-staging.herokuapp.com/blog/read_blog/{pk}"
     ctx = {
         "blog": blog,
         'featured':featured,
@@ -110,27 +113,26 @@ def delete_blog(request, pk):
 
 def edit_blog(request, pk):
     blog =  Blog_post.objects.get(pk=pk)
-    category = blog.category
-    categories = Category.objects.all()
+    Category = blog.category
     if request.method == 'POST':
-        form = Blog_post(request.POST, instance=blog)
-        category_form = Category(request.POST, instance=category)
+        form = CreateBlogPost(request.POST)
+        category_form = CreateCategory(request.POST)
         if "create_blog" in request.POST:
             if form.is_valid():
-                form.category = request.POST['category_name']
-                form.title = request.POST['title']
-                form.content = request.POST['content']
-                form.publish = timezone.now()
-                form.save()
+                blog.category = blog.category
+                blog.title = request.POST['title']
+                blog.content = request.POST['content']
+                blog.publish = timezone.now()
+                blog.save()
+                messages.add_message(request, messages.INFO, 'Successfully edited blog')
                 return redirect(read_blog, pk)
     else:
-        form = Blog_post()
-        category_form = Category()
+        form = CreateBlogPost({'content':blog.content})
         ctx = {
-        'categories':categories,
         'form':form,
-        'category_form':category_form
-    }
+        'title':blog.title,
+        'edit':True
+         }
         return render(request, "front/create_blog.html", ctx )
         
 @login_required

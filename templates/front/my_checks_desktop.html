@@ -65,65 +65,11 @@
                         <span class="checks-subline">
                         {{ check.grace|hc_duration }}
                         </span>
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> Nag interval Build Error Fix #153727845 (#19)
                         </span>
                     </td>
                     <td>
                         {% if check.last_ping %}
                         <span data-toggle="tooltip" title="{{ check.last_ping|date:'N j, Y, P e' }}">
-<<<<<<< HEAD
-                        {{ check.last_ping|naturaltime }}
-                    </span> {% else %} Never {% endif %}
-                    </td>
-                    <td>
-                        <div class="check-menu dropdown">
-                            <button class="btn btn-sm btn-default dropdown-toggle" type="button" data-toggle="dropdown">
-                        <span class="icon-settings" aria-hidden="true"></span>
-                        </button>
-                            <ul class="dropdown-menu">
-                                {% if check.status == 'new' or check.status == 'paused' %}
-                                <li class="disabled">
-                                    {% else %}
-                                    <li>
-                                        {% endif %}
-                                        <a class="pause-check" href="#" data-url="{% url 'hc-pause' check.code %}">
-                                   Pause Monitoring
-                                </a>
-                                    </li>
-                                    <li role="separator" class="divider"></li>
-                                    <li>
-                                        <a href="{% url 'hc-log' check.code %}">
-                                    Log
-                                </a>
-                                    </li>
-                                    <li>
-                                        <a href="#" class="usage-examples" data-url="{{ check.url }}" data-email="{{ check.email }}">
-                                    Usage Examples
-                                </a>
-                                    </li>
-                                    <li role="separator" class="divider"></li>
-                                    <li>
-                                        <a href="#" class="check-menu-remove" data-name="{{ check.name_then_code }}" data-url="{% url 'hc-remove-check' check.code %}">
-                                    Remove
-                                </a>
-                                    </li>
-                            </ul>
-                        </div>
-                    </td>
-                </tr>
-=======
-                    </span>
-                </td>
-                <td>
-                {% if check.last_ping %}
-                    <span
-                        data-toggle="tooltip"
-                        title="{{ check.last_ping|date:'N j, Y, P e' }}">
-=======
->>>>>>> Nag interval Build Error Fix #153727845 (#19)
                         {{ check.last_ping|naturaltime }}
                     </span> {% else %} Never {% endif %}
                     </td>
@@ -172,31 +118,11 @@
             {% if unresolved_checks %} {% if tags %}
             <br />
             <div id="my-unresolved-checks-tags" class="col-sm-12">
-<<<<<<< HEAD
-                <button class="btn btn-info btn-xs clear-all unresolved">Clear Filters</button>
-                {% for tag in down_tags %}
-                    <button class="btn btn-danger btn-xs" data-toggle="button">{{ tag }}</button>
->>>>>>> Ft user requires dashboard for unresolved checks #153727846 (#18)
-                {% endfor %}
-
-            </table>
-
-        </div>
-        <div role="tabpanel" class="tab-pane fade" id="unresolved-checks">
-            {% if unresolved_checks %} {% if tags %}
-            <br />
-            <div id="my-unresolved-checks-tags" class="col-sm-12">
-=======
->>>>>>> Nag interval Build Error Fix #153727845 (#19)
                 <button class="btn btn-info btn-xs clear-all unresolved">Clear Filters</button> {% for tag in down_tags %}
                 <button class="btn btn-danger btn-xs" data-toggle="button">{{ tag }}</button> {% endfor %}
             </div>
             {% endif %}
             <table id="unresolved-checks-table" class="table hidden-xs">
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> Nag interval Build Error Fix #153727845 (#19)
                 <tr>
                     <th></th>
                     <th class="th-name">Name</th>
@@ -208,7 +134,6 @@
                     <th>Last Ping</th>
                     <th></th>
                 </tr>
-<<<<<<< HEAD
 
                 {% for check in unresolved_checks %}
                 <tr class="checks-row">
@@ -232,69 +157,16 @@
                     </td>
                     <td class="timeout-cell">
                         <span data-url="{% url 'hc-update-timeout' check.code %}" data-timeout="{{ check.timeout.total_seconds }}" data-grace="{{ check.grace.total_seconds }}" class="timeout-grace">
-=======
-            <tr>
-                <th></th>
-                <th class="th-name">Name</th>
-                <th>Ping URL</th>
-                <th class="th-period">
-                    Period <br />
-                    <span class="checks-subline">Grace</span>
-                </th>
-                <th>Last Ping</th>
-                <th></th>
-            </tr>
-=======
->>>>>>> Nag interval Build Error Fix #153727845 (#19)
-
-                {% for check in unresolved_checks %}
-                <tr class="checks-row">
-                    <td class="indicator-cell">
-                        <span class="status icon-down"></span>
-                    </td>
-                    <td class="name-cell">
-                        <div data-name="{{ check.name }}" data-tags="{{ check.tags }}" data-url="{% url 'hc-update-name' check.code %}" class="my-checks-name {% if not check.name %}unnamed{% endif %}">
-                            <div>{{ check.name|default:"unnamed" }}</div>
-                            {% for tag in check.tags_list %}
-                            <span class="label label-tag">{{ tag }}</span> {% endfor %}
-                        </div>
-                    </td>
-                    <td class="url-cell">
-                        <span class="my-checks-url">
-                        <span class="base">{{ ping_endpoint }}</span>{{ check.code }}
-                        </span>
-                        <button class="copy-link hidden-sm" data-clipboard-text="{{ check.url }}">
-                        copy
-                    </button>
-<<<<<<< HEAD
-                </td>
-                <td class="timeout-cell">
-                    <span
-                        data-url="{% url 'hc-update-timeout' check.code %}"
-                        data-timeout="{{ check.timeout.total_seconds }}"
-                        data-grace="{{ check.grace.total_seconds }}"
-                        class="timeout-grace">
->>>>>>> Ft user requires dashboard for unresolved checks #153727846 (#18)
-=======
-                    </td>
-                    <td class="timeout-cell">
-                        <span data-url="{% url 'hc-update-timeout' check.code %}" data-timeout="{{ check.timeout.total_seconds }}" data-grace="{{ check.grace.total_seconds }}" class="timeout-grace">
->>>>>>> Nag interval Build Error Fix #153727845 (#19)
                         {{ check.timeout|hc_duration }}
                         <br />
                         <span class="checks-subline">
                         {{ check.grace|hc_duration }}
                         </span>
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> Nag interval Build Error Fix #153727845 (#19)
                         </span>
                     </td>
                     <td>
                         {% if check.last_ping %}
                         <span data-toggle="tooltip" title="{{ check.last_ping|date:'N j, Y, P e' }}">
-<<<<<<< HEAD
                         {{ check.last_ping|naturaltime }}
                     </span> {% else %} Never {% endif %}
                     </td>
@@ -346,70 +218,3 @@
     </div>
 
 </div>
-=======
-                    </span>
-                </td>
-                <td>
-                {% if check.last_ping %}
-                    <span
-                        data-toggle="tooltip"
-                        title="{{ check.last_ping|date:'N j, Y, P e' }}">
-=======
->>>>>>> Nag interval Build Error Fix #153727845 (#19)
-                        {{ check.last_ping|naturaltime }}
-                    </span> {% else %} Never {% endif %}
-                    </td>
-                    <td>
-                        <div class="check-menu dropdown">
-                            <button class="btn btn-sm btn-default dropdown-toggle" type="button" data-toggle="dropdown">
-                        <span class="icon-settings" aria-hidden="true"></span>
-                        </button>
-                            <ul class="dropdown-menu">
-                                {% if check.status == 'new' or check.status == 'paused' %}
-                                <li class="disabled">
-                                    {% else %}
-                                    <li>
-                                        {% endif %}
-                                        <a class="pause-check" href="#" data-url="{% url 'hc-pause' check.code %}">
-                                   Pause Monitoring
-                                </a>
-                                    </li>
-                                    <li role="separator" class="divider"></li>
-                                    <li>
-                                        <a href="{% url 'hc-log' check.code %}">
-                                    Log
-                                </a>
-                                    </li>
-                                    <li>
-                                        <a href="#" class="usage-examples" data-url="{{ check.url }}" data-email="{{ check.email }}">
-                                    Usage Examples
-                                </a>
-                                    </li>
-                                    <li role="separator" class="divider"></li>
-                                    <li>
-                                        <a href="#" class="check-menu-remove" data-name="{{ check.name_then_code }}" data-url="{% url 'hc-remove-check' check.code %}">
-                                    Remove
-                                </a>
-                                    </li>
-                            </ul>
-                        </div>
-                    </td>
-                </tr>
-                {% endfor %}
-
-            </table>
-            {% else %}
-            <br />
-            <div class="text-center alert alert-info">You don't have any unresolved checks.</div>
-            {% endif %}
-
-        </div>
-    </div>
-
-<<<<<<< HEAD
-
-</div>
->>>>>>> Ft user requires dashboard for unresolved checks #153727846 (#18)
-=======
-</div>
->>>>>>> Nag interval Build Error Fix #153727845 (#19)

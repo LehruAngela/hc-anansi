@@ -9,6 +9,15 @@
 {% block title %}blog{% endblock %}
 
 {% block content %}
+{% if messages %}
+<div class="col-sm-12">
+    {% for message in messages %}
+        <div class="alert alert-info alert-dismissable">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+       {{ message }}
+    {% endfor %}
+</div>
+{% endif %}
 <div class="container">
     <div>
         <div class="container">
@@ -28,19 +37,26 @@
    <span class="glyphicon glyphicon-home"></span>
 
     <form method="POST"> {% csrf_token %}
+        {% if edit == False %}
         <label for="category">Select category:</label><br>
         <select id="category" name="category_name" class="form-control">
           {% for category in category %}
           <option value="{{ category.name }}"> {{ category.name }} </option>
           {% endfor %}
         </select><br>
+        {% endif %}
         <label for="title">Title:</label><br>
-        <input type="text" name="title" class="form-control myfieldclass" placeholder="Blog Title" required="" id="id_title"><br>
+        <input type="text" name="title" class="form-control myfieldclass" placeholder="Blog Title" required="" id="id_title" value="{{ title }}"><br>
         {{ form }}
-        <button type="submit" name="create_blog" class="submit-blog btn btn-default">Create Blog</button>
+        {% if edit == True %}
+        <button type="submit" name="create_blog" class="submit-blog btn btn-primary">Update Blog</button>
+        {% else %}
+        <button type="submit" name="create_blog" class="submit-blog btn btn-primary">Create Blog</button>
+        {% endif %}
     </form>
 </div>
     <br>
+    {% if edit == False %}
       <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModalNorm", style="padding: 9px;">
         ADD
         </button>
@@ -74,5 +90,6 @@
                 </div>
             </div>
         </div>
+    {% endif %}    
 
 {% endblock %}
