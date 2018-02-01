@@ -33,17 +33,13 @@ def pairwise(iterable):
 
 
 def blogs(request, filter_by):
-<<<<<<< HEAD
-=======
     num = 3
->>>>>>> [Fix:#153727855]Improved UI and added edit and delete feature to blog posts
     category = Category.objects.all()
     if int(filter_by) > 0:
         category_id = Category.objects.get(pk=filter_by).id
         stories = Blog_post.objects.filter(category=category_id)
     else:
         stories = Blog_post.objects.all()
-    num = 3
     list_of_stories = [story for story in stories]
     blogs = [list_of_stories[i:i+num] for i in range(0, len(list_of_stories), num)]
     ctx = {
@@ -53,7 +49,6 @@ def blogs(request, filter_by):
     return render(request, "front/blog_posts.html", ctx)
 
 
-@login_required
 def create_blog(request):
     form = CreateBlogPost(request.POST)
     category_form = CreateCategory(request.POST)
@@ -64,7 +59,7 @@ def create_blog(request):
             ctg.save()
     elif "create_blog" in request.POST:
         if form.is_valid():
-            title = request.POST['title']
+            title = request.POST['title'] 
             blog = form.cleaned_data['content']
             selected_category = request.POST['category_name']
             category = Category.objects.get(name=selected_category)
@@ -87,11 +82,7 @@ def create_blog(request):
 def read_blog(request, pk):
     comment_form = CreateCommentForm(request.POST)
     blog = Blog_post.objects.get(pk=pk)
-<<<<<<< HEAD
-    featured = Blog_post.objects.get(pk=1)
-=======
     featured = Blog_post.objects.get(pk=pk)
->>>>>>> ADD edit and delete functionality
     comments = Comment.objects.filter(blog = blog.id)
     url = f"http://localhost:8000/blog/read_blog/{pk}"
     ctx = {

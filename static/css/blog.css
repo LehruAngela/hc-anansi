@@ -19,7 +19,11 @@
     box-shadow: 0 0 1px #999;
     margin: .8em;
     padding: 0;
+<<<<<<< HEAD
     width: 40%
+=======
+    width: 60%
+>>>>>>> 1b6c6c7389d654a415c25e22d23119f2a605fafa
    }
    .featured-blog-item .card-body a{
     width: 100%;
@@ -27,6 +31,15 @@
     text-transform: uppercase;
     font-family: 'Abel', sans-serif;
   }
+<<<<<<< HEAD
+=======
+  .featured-blog-item img{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+>>>>>>> 1b6c6c7389d654a415c25e22d23119f2a605fafa
    .blog-item img {
      width: 65%;
      overflow: hidden;
@@ -72,7 +85,11 @@
     margin-right: 0% !important;
     width: 50%;
     min-width: 500px;
+<<<<<<< HEAD
 }
+=======
+  }
+>>>>>>> 1b6c6c7389d654a415c25e22d23119f2a605fafa
 
 
   .wmd-input {
@@ -82,11 +99,31 @@
     border: 1px solid DarkGray;
   }
 
+<<<<<<< HEAD
 /* Style all font awesome icons */
 .fa {
   padding: 10px;
   font-size: 30px;
   width: 50px;
+=======
+.share{
+  width: 100%;
+  margin: 0 auto;
+  margin-top: 10em;
+  text-align: justify;
+}
+
+.share a{
+  display: block;
+  margin: .3em;
+}
+
+/* Style all font awesome icons */
+.fa {
+  padding: 10px;
+  font-size: 20px;
+  width: 40px;
+>>>>>>> 1b6c6c7389d654a415c25e22d23119f2a605fafa
   text-align: center;
   text-decoration: none;
   border-radius: 90%;
@@ -136,7 +173,11 @@
   width: 100%;
   text-align: justify;
   font-family: 'Abel', sans-serif;
+<<<<<<< HEAD
   background-color: #f5f5f5;
+=======
+  background-color: rgb(186, 236, 193);
+>>>>>>> 1b6c6c7389d654a415c25e22d23119f2a605fafa
 }
 .comments .comment-body{
   width: 100%;

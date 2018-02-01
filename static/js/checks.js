@@ -214,13 +214,8 @@ $(function() {
 
         function applyFilters(index, element) {
             var tags = $(".my-checks-name", element).data("tags").split(" ");
-<<<<<<< HEAD
-            for (var i = 0, tag; tag = checked[i]; i++) {
-                if (tags.indexOf(tag) == -1) {
-=======
             $.each(checked, function(key, value) {
                 if (key == -1) {
->>>>>>> Nag interval Build Error Fix #153727845 (#19)
                     $(element).hide();
                     return;
                 }
@@ -309,9 +304,8 @@ $(function() {
     clipboard.on('error', function(e) {
         var text = e.trigger.getAttribute("data-clipboard-text");
         prompt("Press Ctrl+C to select:", text);
-    });
+    }); 
 });
-
 
 $('#myModal').on('shown.bs.modal', function () {
     $('#myInput').trigger('focus')

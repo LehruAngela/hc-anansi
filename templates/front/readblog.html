@@ -35,7 +35,7 @@
             From Health Checks
         </h3>
         <div class="blog-post">
-            <h2 class="blog-post-title" style="font-weight:bold; font-size:35px; font-family:'Abel',sans-serif;"> {{ blog.title }}</h2>
+            <h2 class="blog-post-title" style="font-weight:bold; font-size:35px; font-family:'Abel',sans-serif;">{{ blog.title }}</h2>
             <p class="blog-post-meta">{{ blog.published }} by <a href="#">{{ blog.user.email }}</a>
 
             {% if request.user.id == blog.user.id %}    
@@ -51,7 +51,7 @@
         
         {% if request.user.is_authenticated %}
         <form method="POST"> {% csrf_token %}
-        <label for="title" style="font-family:'Abel',sans-serif;">Comments:</label><br>
+        <label for="title" style="font-family:'Abel',sans-serif;">Responses:</label><br>
         <input type="text" name="comment" class="form-control myfieldclass" placeholder="Add Comment" id="comment"><br>
         <button class="btn btn-primary btn-sm" name="add_comment" style="padding: 5px;">ADD</button>
         </form>
@@ -60,39 +60,23 @@
         {% for comment in comments %}   
         <div class="comments">  
             <div class="comment-header">
-                Comment by {{ comment.user.email }}<br>
+                Response by {{ comment.user.email }}<br>
                 {{ comment.published }}
             </div>
             <div class="comment-body">
                 {{comment.comment}}
             </div>
         </div>
-
-    </div>
-    <aside class="col-md-4 blog-sidebar">
-        <div class="p-3 mb-3 bg-light rounded">
-            <h2 class="font-italic">Get Involved</h2>
-            <p class="mb-0"> Have something to you feel the rest should know!
-                    <br> <strong>Start writting already.</strong>
-                    </p>
-                    <a href="{% url 'hc-create_blog' %}" class="btn btn-primary">Get Started</a>
-        </div> 
-        <br><br><br>
-        <div class="p-3">
-            <h3 class="font-italic">Featured article</h3>
-            <div class="card" style="width: 18rem;">
-                            <img class="card-img-top img-responsive" src="https://slack-files2.s3-us-west-2.amazonaws.com/avatars/2016-07-07/57802419554_47decd25da0b63135665_512.png" alt="Card image cap">
-                            <div class="card-body">
-                                <p> hey there am today's featured article </p> <br>
-                            </div>
-                            <a href="{% url 'hc-read_blog' pk=featured.id %}" class="btn btn-primary">Read more</a>
-                        </div>
-
         {% endfor %}
+    </div>
+    <aside class="col-md-4 blog-sidebar" align="center">
+        <div>
+        
+        <div class="share" align="center">
+            <h4 class="pb-3 mb-4 font-italic border-bottom">Share</h4>
+            <a target="_blank"  href="https://twitter.com/intent/tweet?text={{blog.title}}&url={{tweet_url}}&hashtags=HealthChecks" class="fa fa-twitter"></a>
+            <a target="_blank" href="http://www.linkedin.com/shareArticle?url=http://localhost:8000{{ request.get_full_path|urlencode }}&title={{ blog.title }}&summary={{ blog.content }}&source=http://localhost:8000" class="fa fa-linkedin"></a><br><br>
         </div>
-        </div>
-</main>
-
         
         <div class=" featured-blog-item">
             <h3 class="font-italic" style="text-align:center;">Featured article</h3>
@@ -102,9 +86,7 @@
                 <a href="{% url 'hc-read_blog' pk=featured.id %}" class="btn btn-primary">Read more</a>
             </div>
         </div>
-
-</div>
-</aside>
+</main>
 
 <script
   src="http://code.jquery.com/jquery-1.12.4.min.js"
