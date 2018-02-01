@@ -21,6 +21,8 @@ from hc.front.forms import (AddChannelForm, AddWebhookForm, NameTagsForm,
                             TimeoutForm)
 from .forms import CreateBlogPost, CreateCategory, CreateCommentForm
 from .models import Category, Blog_post, Comment
+from django.contrib import messages
+
 
 # from itertools recipes:
 def pairwise(iterable):
@@ -31,6 +33,10 @@ def pairwise(iterable):
 
 
 def blogs(request, filter_by):
+<<<<<<< HEAD
+=======
+    num = 3
+>>>>>>> [Fix:#153727855]Improved UI and added edit and delete feature to blog posts
     category = Category.objects.all()
     if int(filter_by) > 0:
         category_id = Category.objects.get(pk=filter_by).id
@@ -67,6 +73,7 @@ def create_blog(request):
             blog = Blog_post(title=title, content=blog, category=category,
                              published=published, user=user)
             blog.save()
+            messages.add_message(request, messages.INFO, 'Successfully created blog')
             return redirect(read_blog, pk=blog.id)
     categories = Category.objects.all()
     ctx = {
@@ -104,7 +111,9 @@ def read_blog(request, pk):
 
 
 def delete_blog(request, pk):
+    deleted_blog = Blog_post.objects.get(pk=pk)
     Blog_post.objects.get(pk=pk).delete()
+    messages.add_message(request, messages.INFO, 'Successfully deleted blog')
     return redirect(blogs, filter_by=0)
 
 

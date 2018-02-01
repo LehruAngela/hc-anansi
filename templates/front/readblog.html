@@ -4,6 +4,15 @@
 {% block title %}Read-blog | Healthchecks{% endblock %}
 
 {% block content %}
+{% if messages %}
+<div class="col-sm-12">
+    {% for message in messages %}
+        <div class="alert alert-info alert-dismissable">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+       {{ message }}
+    {% endfor %}
+</div>
+{% endif %}
 <div class="container">
         <div>
             <div class="container">
