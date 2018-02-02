@@ -17,6 +17,15 @@ class BlogTest(BaseTestCase):
         self.blog.save()
    
 
+    def test_create_category(self):
+            url = reverse('hc-create_blog')
+            data = {'category': ['Design'], 'new_category': ['']}
+            response = self.client.post(url, data)
+            query_category = Category.objects.get(name="Design")
+            self.assertEqual('Design', query_category.name)
+            self.assertEqual(response.status_code, 302)
+
+
     def test_create_blog(self):
         """Test to check if blogs are created"""
         url = reverse('hc-create_blog')

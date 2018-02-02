@@ -60,6 +60,7 @@ def create_blog(request):
                 name = category_form.cleaned_data['category']
                 ctg = Category(name = name)
                 ctg.save()
+                return redirect(create_blog)
         elif "create_blog" in request.POST:
             if form.is_valid():
                 title = request.POST['title'] 
