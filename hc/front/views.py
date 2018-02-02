@@ -33,15 +33,16 @@ def pairwise(iterable):
 
 
 def blogs(request, filter_by):
-    num = 3
+    """function to render the home page"""
+    num = 3 # setting number of blog posts to be displayed as three per row
     category = Category.objects.all()
-    if int(filter_by) > 0:
+    if int(filter_by):
         category_id = Category.objects.get(pk=filter_by).id
         stories = Blog_post.objects.filter(category=category_id)
     else:
         stories = Blog_post.objects.all()
     list_of_stories = [story for story in stories]
-    blogs = [list_of_stories[i:i+num] for i in range(0, len(list_of_stories), num)]
+    blogs = [list_of_stories[item:item+num] for item in range(0, len(list_of_stories), num)]
     ctx = {
         'category':category,
         'blogs':blogs
@@ -50,6 +51,7 @@ def blogs(request, filter_by):
 
 
 def create_blog(request):
+    """function to create a category and a blog """
     form = CreateBlogPost(request.POST)
     category_form = CreateCategory(request.POST)
     if request.method == 'POST':

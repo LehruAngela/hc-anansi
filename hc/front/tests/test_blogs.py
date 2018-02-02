@@ -9,15 +9,23 @@ class BlogTest(BaseTestCase):
         self.client.login(username="alice@example.org", password="password")
         self.category = Category(name='Tech')
         self.category.save()
-        self.blog = Blog_post(title='Python',content='This is a blog on python', 
-                             category = self.category, published=timezone.now())
+        self.blog = Blog_post(
+            title='Python',
+            content='This is a blog on python', 
+            category = self.category, 
+            published=timezone.now())
         self.blog.save()
    
 
     def test_create_blog(self):
         """Test to check if blogs are created"""
         url = reverse('hc-create_blog')
-        data = {'category_name': ['Tech'], 'title': ['Html'], 'content': ['This is a blog on html'], 'create_blog': ['']}
+        data = {
+            'category_name': ['Tech'],
+            'title': ['Html'],
+            'content': ['This is a blog on html'],
+            'create_blog': ['']
+            }
         response = self.client.post(url, data)
         query_blog = Blog_post.objects.get(title="Html")
         self.assertEqual('Html', query_blog.title)

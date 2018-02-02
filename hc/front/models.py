@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
-
+from django.utils import timezone
 
 class Category(models.Model):
     name = models.CharField(max_length=100)
@@ -12,7 +12,7 @@ class Category(models.Model):
 class Blog_post(models.Model):
     title = models.CharField(max_length=100)
     content = models.TextField()
-    published = models.DateTimeField(null=True, blank=True)
+    published = models.DateTimeField(null=timezone.now)
     category = models.ForeignKey(Category, on_delete = models.CASCADE)
     user = models.ForeignKey(User, blank=True, null=True, on_delete = models.CASCADE)
 
@@ -23,7 +23,7 @@ class Comment(models.Model):
     comment = models.TextField()
     blog = models.ForeignKey(Blog_post, blank=True, null=True )
     user = models.ForeignKey(User, blank=True, null=True, on_delete = models.CASCADE)
-    published = models.DateTimeField(null=True, blank=True)
+    published = models.DateTimeField(null=timezone.now)
 
 
     def __str__(self):
