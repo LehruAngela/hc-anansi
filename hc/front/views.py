@@ -90,7 +90,7 @@ def read_blog(request, pk):
     blog = Blog_post.objects.get(pk=pk)
     featured = Blog_post.objects.get(pk=pk)
     comments = Comment.objects.filter(blog = blog.id)
-    url = f"http://hc-anansi-staging.herokuapp.com/blog/read_blog/{pk}"
+    url = f"http://localhost:8000/blog/read_blog/{pk}"
     ctx = {
         "blog": blog,
         'featured':featured,
