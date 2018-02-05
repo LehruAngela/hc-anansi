@@ -37,8 +37,8 @@ class BlogTest(BaseTestCase):
             }
         response = self.client.post(url, data)
         query_blog = Blog_post.objects.get(title="Html")
-        self.assertEqual('Html', query_blog.title)
         self.assertEqual(response.status_code, 302)
+        self.assertEqual('Html', query_blog.title)
 
 
     def test_home_page_returns_all_blogs(self):
@@ -46,3 +46,29 @@ class BlogTest(BaseTestCase):
         response = self.client.get(reverse('hc-blog', kwargs={'filter_by':0}))
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'front/blog_posts.html')
+
+
+    def test_edit_blog(self):
+            """Test to check if blogs are edited"""
+            blog = Blog_post.objects.get(title="Python")
+            data = { 'title': ['ben'],
+            'content': ['If it were onlya question of qualitycv'], 'create_blog': ['']}
+            response = self.client.post(reverse('hc-edit_blog', kwargs={'pk':blog.id}), data)
+            edited_blog = Blog_post.objects.filter(pk=blog.id).first()
+            self.assertEqual(response.status_code, 302)
+            self.assertEqual('ben', edited_blog.title)
+
+            
+
+    def test_delete_blog(self):    
+        """Test to check if blogs are deleted"""
+        blog = Blog_post.objects.get(title="Python")
+        response = self.client.get(reverse('hc-delete_blog', kwargs={'pk':blog.id}))
+        deleted_blog = Blog_post.objects.filter(pk=blog.id).first()
+        self.assertEqual(response.status_code, 302)
+        self.assertNotEqual(blog, deleted_blog)
+
+
+   
+        
+
