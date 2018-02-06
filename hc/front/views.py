@@ -47,7 +47,7 @@ def blogs(request, filter_by):
         'category':category,
         'blogs':blogs
     }
-    return render(request, "front/blog_posts.html", ctx)
+    return render(request, 'front/blog_posts.html', ctx)
 
 
 def create_blog(request):
@@ -55,13 +55,13 @@ def create_blog(request):
     form = CreateBlogPost(request.POST)
     category_form = CreateCategory(request.POST)
     if request.method == 'POST':
-        if "new_category" in request.POST:
+        if 'new_category' in request.POST:
             if category_form.is_valid():
                 name = category_form.cleaned_data['category']
                 ctg = Category(name = name)
                 ctg.save()
                 return redirect(create_blog)
-        elif "create_blog" in request.POST:
+        elif 'create_blog' in request.POST:
             if form.is_valid():
                 title = request.POST['title'] 
                 blog = form.cleaned_data['content']
@@ -82,7 +82,7 @@ def create_blog(request):
             'category_form':category_form,
             'edit': False
             }
-        return render(request, "front/create_blog.html", ctx)
+        return render(request, 'front/create_blog.html', ctx)
 
 
 def read_blog(request, pk):
@@ -90,21 +90,21 @@ def read_blog(request, pk):
     blog = Blog_post.objects.get(pk=pk)
     featured = Blog_post.objects.get(pk=pk)
     comments = Comment.objects.filter(blog = blog.id)
-    url = f"http://localhost:8000/blog/read_blog/{pk}"
+    url = str.format("http://localhost:8000/blog/read_blog/{pk}")
     ctx = {
-        "blog": blog,
+        'blog': blog,
         'featured':featured,
         'tweet_url':url,
         'comments':comments
     }
-    if "add_comment" in request.POST:
+    if 'add_comment' in request.POST:
         if comment_form.is_valid():
             posted_comment = request.POST['comment']
             published = timezone.now()
             comment = Comment(comment = posted_comment, blog = blog, user = request.user, published=published)
             comment.save()
             return redirect(read_blog, pk=blog.id)
-    return render(request, "front/readblog.html", ctx )
+    return render(request, 'front/readblog.html', ctx )
 
 
 def delete_blog(request, pk):
