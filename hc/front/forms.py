@@ -19,6 +19,7 @@ class NameTagsForm(forms.Form):
 
 
 #increase max value in forms to allow upto 60days
+#increase max value in forms to allow upto 60days
 class TimeoutForm(forms.Form):
     min_time = 60
     max_time = 5184000
@@ -46,7 +47,6 @@ class AddWebhookForm(forms.Form):
 
     def get_value(self):
         return "{value_down}\n{value_up}".format(**self.cleaned_data)
-
 
 class CreateBlogPost(forms.Form):
     content = forms.CharField(widget = PagedownWidget)
