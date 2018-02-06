@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.utils import timezone
 
+<<<<<<< HEAD
 # The FAQs model
 class Faq(models.Model):
     """
@@ -31,6 +32,8 @@ class Tutorial(models.Model):
         return self.title
 
     
+=======
+>>>>>>> 444ed87b7e5c2bf61c9d44aabfe99e77eb89b6e3
 class Category(models.Model):
     name = models.CharField(max_length=100)
 
@@ -56,4 +59,8 @@ class Comment(models.Model):
 
 
     def __str__(self):
+<<<<<<< HEAD
         return f"{self.comment}"
+=======
+        return f"{self.comment}"
+>>>>>>> 444ed87b7e5c2bf61c9d44aabfe99e77eb89b6e3

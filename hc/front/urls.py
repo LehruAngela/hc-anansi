@@ -54,4 +54,8 @@ urlpatterns = [
     url(r'^blog/', include(blog_urls)),
     url(r'^blog/(?P<filter_by>\d+)/', include(blog_urls)),
     url(r'^blog/([\w-]+)/', include(blog_urls)),
+<<<<<<< HEAD
+=======
+
+>>>>>>> 444ed87b7e5c2bf61c9d44aabfe99e77eb89b6e3
 ]
