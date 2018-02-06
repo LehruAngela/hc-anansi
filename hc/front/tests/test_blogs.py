@@ -47,6 +47,19 @@ class BlogTest(BaseTestCase):
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'front/blog_posts.html')
 
+    def test_filter_by_category(self):
+        """Test to check if filter by category works"""
+        url = reverse('hc-create_blog')
+        data = {
+            'category_name': self.category,
+            'title': ['Html'],
+            'content': ['This is a blog on html'],
+            'create_blog': ['']
+            }
+        response = self.client.post(url, data)
+        response_one = self.client.get(reverse('hc-blog', kwargs={'filter_by':self.category.id}))
+        self.assertEqual(response_one.status_code, 200)
+        self.assertTemplateUsed(response_one, 'front/blog_posts.html')
 
     def test_edit_blog(self):
             """Test to check if blogs are edited"""
