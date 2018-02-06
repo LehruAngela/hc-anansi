@@ -12,7 +12,7 @@ class BlogTest(BaseTestCase):
         self.blog = Blog_post(
             title='Python',
             content='This is a blog on python', 
-            category = self.category, 
+            category=self.category, 
             published=timezone.now())
         self.blog.save()
    
@@ -51,14 +51,14 @@ class BlogTest(BaseTestCase):
     def test_edit_blog(self):
             """Test to check if blogs are edited"""
             blog = Blog_post.objects.get(title="Python")
-            data = { 'title': ['ben'],
-            'content': ['If it were onlya question of qualitycv'], 'create_blog': ['']}
+            data = {'title': ['Css'],
+                    'content': ['This is a blog on css'],
+                    'create_blog': ['']}
             response = self.client.post(reverse('hc-edit_blog', kwargs={'pk':blog.id}), data)
             edited_blog = Blog_post.objects.filter(pk=blog.id).first()
             self.assertEqual(response.status_code, 302)
-            self.assertEqual('ben', edited_blog.title)
+            self.assertEqual('Css', edited_blog.title)
 
-            
 
     def test_delete_blog(self):    
         """Test to check if blogs are deleted"""
@@ -67,8 +67,3 @@ class BlogTest(BaseTestCase):
         deleted_blog = Blog_post.objects.filter(pk=blog.id).first()
         self.assertEqual(response.status_code, 302)
         self.assertNotEqual(blog, deleted_blog)
-
-
-   
-        
-

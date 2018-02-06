@@ -55,14 +55,12 @@ def create_blog(request):
     form = CreateBlogPost(request.POST)
     category_form = CreateCategory(request.POST)
     if request.method == 'POST':
-        if 'new_category' in request.POST:
-            if category_form.is_valid():
+        if 'new_category' in request.POST and category_form.is_valid():
                 name = category_form.cleaned_data['category']
                 ctg = Category(name = name)
                 ctg.save()
                 return redirect(create_blog)
-        elif 'create_blog' in request.POST:
-            if form.is_valid():
+        elif 'create_blog' in request.POST and form.is_valid():
                 title = request.POST['title'] 
                 blog = form.cleaned_data['content']
                 selected_category = request.POST['category_name']
@@ -77,9 +75,9 @@ def create_blog(request):
     else:
         categories = Category.objects.all()
         ctx = {
-            'category':categories,
-            'form':CreateBlogPost({'content':'Write Blog'}),
-            'category_form':category_form,
+            'category': categories,
+            'form': CreateBlogPost({'content':'Write Blog'}),
+            'category_form': category_form,
             'edit': False
             }
         return render(request, 'front/create_blog.html', ctx)
@@ -90,15 +88,14 @@ def read_blog(request, pk):
     blog = Blog_post.objects.get(pk=pk)
     featured = Blog_post.objects.get(pk=pk)
     comments = Comment.objects.filter(blog = blog.id)
-    url = str.format("http://localhost:8000/blog/read_blog/{pk}")
+    url = "hc-anansi-staging.herokuapp.com/blog/read_blog/{pk}".format(pk=pk)
     ctx = {
         'blog': blog,
-        'featured':featured,
-        'tweet_url':url,
-        'comments':comments
+        'featured': featured,
+        'tweet_url': url,
+        'comments': comments
     }
-    if 'add_comment' in request.POST:
-        if comment_form.is_valid():
+    if 'add_comment' in request.POST and comment_form.is_valid():
             posted_comment = request.POST['comment']
             published = timezone.now()
             comment = Comment(comment = posted_comment, blog = blog, user = request.user, published=published)
@@ -120,8 +117,7 @@ def edit_blog(request, pk):
     if request.method == 'POST':
         form = CreateBlogPost(request.POST)
         category_form = CreateCategory(request.POST)
-        if "create_blog" in request.POST:
-            if form.is_valid():
+        if "create_blog" in request.POST and form.is_valid():
                 blog.category = blog.category
                 blog.title = request.POST['title']
                 blog.content = request.POST['content']
@@ -132,9 +128,9 @@ def edit_blog(request, pk):
     else:
         form = CreateBlogPost({'content':blog.content})
         ctx = {
-        'form':form,
-        'title':blog.title,
-        'edit':True
+        'form': form,
+        'title': blog.title,
+        'edit': True
          }
         return render(request, "front/create_blog.html", ctx )
         
